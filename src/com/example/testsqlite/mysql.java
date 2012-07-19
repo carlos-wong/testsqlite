@@ -3,6 +3,7 @@
  */
 package com.example.testsqlite;
 
+import android.R.string;
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteDatabase.CursorFactory;
@@ -13,6 +14,8 @@ import android.database.sqlite.SQLiteOpenHelper;
  * 
  */
 public class mysql extends SQLiteOpenHelper {
+	
+	public final static String gameItemTable = "game_item";
 
 	public mysql(Context context, String name, CursorFactory factory,
 			int version) {
@@ -30,7 +33,7 @@ public class mysql extends SQLiteOpenHelper {
 	@Override
 	public void onCreate(SQLiteDatabase arg0) {
 		// TODO Auto-generated method stub
-		arg0.execSQL("create table if not exists hero_info("
+		arg0.execSQL("create table if not exists game_item("
 				+ "id integer primary key,"
 				+ "name varchar," + "level integer)");
 	}

@@ -19,12 +19,6 @@ public class MainActivity extends Activity {
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
-	}
-
-	@Override
-	public boolean onCreateOptionsMenu(Menu menu) {
-		getMenuInflater().inflate(R.menu.activity_main, menu);
-
 		// 创建MySQLiteOpenHelper辅助类对象
 
 		myHelper = new mysql(this, "my.db", null, 1);
@@ -37,6 +31,24 @@ public class MainActivity extends Activity {
 		//
 		String result = queryData(myHelper);
 		Log.v("carlos", "result is: " + result);
+	}
+
+	@Override
+	public boolean onCreateOptionsMenu(Menu menu) {
+		getMenuInflater().inflate(R.menu.activity_main, menu);
+
+//		// 创建MySQLiteOpenHelper辅助类对象
+//
+//		myHelper = new mysql(this, "my.db", null, 1);
+//
+//		// //向数据库中插入和更新数据
+//		//
+//		insertAndUpdateData(myHelper);
+//		//
+//		// //查询数据
+//		//
+//		String result = queryData(myHelper);
+//		Log.v("carlos", "result is: " + result);
 		return true;
 	}
 
@@ -50,7 +62,8 @@ public class MainActivity extends Activity {
 
 		// 使用execSQL方法向表中插入数据
 
-		db.execSQL("insert into hero_info(name,level) values('bb',0)");
+		db.execSQL("insert into " + mysql.gameItemTable
+				+ "(name,level) values('bb',0)");
 
 		// 使用insert方法向表中插入数据
 
@@ -62,7 +75,7 @@ public class MainActivity extends Activity {
 
 		// 调用方法插入数据
 
-		db.insert("hero_info", "id", values);
+		db.insert(mysql.gameItemTable, "id", values);
 
 		// 使用update方法更新表中的数据
 		// 清空ContentValues对象
@@ -75,7 +88,7 @@ public class MainActivity extends Activity {
 
 		// 更新xh的level 为10
 
-		db.update("hero_info", values, "name = \"bb\"", null);
+		db.update(mysql.gameItemTable, values, "name = \"bb\"", null);
 
 		// 关闭SQLiteDatabase对象
 
@@ -95,8 +108,8 @@ public class MainActivity extends Activity {
 
 		// 查询表中的数据
 
-		Cursor cursor = db.query("hero_info", null, "name = ?", new String[]{"carlos"}, null, null,
-				"id asc");
+		Cursor cursor = db.query(mysql.gameItemTable, null, "name = ?",
+				new String[] { "carlos" }, null, null, "id asc");
 
 		// 获取name列的索引
 
@@ -113,9 +126,8 @@ public class MainActivity extends Activity {
 			result = result + cursor.getInt(levelIndex) + " \n";
 
 		}
-
 		cursor.close();// 关闭结果集
-
+		
 		db.close();// 关闭数据库对象
 
 		return result;
@@ -125,11 +137,11 @@ public class MainActivity extends Activity {
 	@Override
 	protected void onDestroy() {
 
-		SQLiteDatabase db = myHelper.getWritableDatabase();// 获取数据库对象
+//		SQLiteDatabase db = myHelper.getWritableDatabase();// 获取数据库对象
 
 		// 删除hero_info表中所有的数据 传入1 表示删除所有行------>点击back按钮
 
-		db.delete("hero_info", "1", null);
+//		db.delete(mysql.gameItemTable, "1", null);
 
 		super.onDestroy();
 
