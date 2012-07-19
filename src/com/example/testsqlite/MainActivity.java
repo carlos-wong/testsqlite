@@ -31,12 +31,12 @@ public class MainActivity extends Activity {
 
 		// //向数据库中插入和更新数据
 		//
-		 insertAndUpdateData(myHelper);
+		insertAndUpdateData(myHelper);
 		//
 		// //查询数据
 		//
-		 String result = queryData(myHelper);
-		 Log.v("carlos","result is: "+result);
+		String result = queryData(myHelper);
+		Log.v("carlos", "result is: " + result);
 		return true;
 	}
 
@@ -65,18 +65,17 @@ public class MainActivity extends Activity {
 		db.insert("hero_info", "id", values);
 
 		// 使用update方法更新表中的数据
-
 		// 清空ContentValues对象
 
 		values.clear();
 
-		values.put("name", "xh");
+		values.put("name", "carlos");
 
 		values.put("level", 10);
 
 		// 更新xh的level 为10
 
-		db.update("hero_info", values, "level = 5", null);
+		db.update("hero_info", values, "name = \"bb\"", null);
 
 		// 关闭SQLiteDatabase对象
 
@@ -96,7 +95,7 @@ public class MainActivity extends Activity {
 
 		// 查询表中的数据
 
-		Cursor cursor = db.query("hero_info", null, null, null, null, null,
+		Cursor cursor = db.query("hero_info", null, "name = ?", new String[]{"carlos"}, null, null,
 				"id asc");
 
 		// 获取name列的索引
@@ -130,7 +129,7 @@ public class MainActivity extends Activity {
 
 		// 删除hero_info表中所有的数据 传入1 表示删除所有行------>点击back按钮
 
-		// db.delete("hero_info", "1", null);
+		db.delete("hero_info", "1", null);
 
 		super.onDestroy();
 
