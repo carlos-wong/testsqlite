@@ -1,0 +1,4 @@
+testsqlite
+==========
+
+android sqlite test
