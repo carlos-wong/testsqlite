@@ -33,7 +33,7 @@ public class mysql extends SQLiteOpenHelper {
 	@Override
 	public void onCreate(SQLiteDatabase arg0) {
 		// TODO Auto-generated method stub
-		arg0.execSQL("create table if not exists game_item("
+		arg0.execSQL("create table if not exists "+gameItemTable+"("
 				+ "id integer primary key,"
 				+ "name varchar," + "level integer)");
 	}

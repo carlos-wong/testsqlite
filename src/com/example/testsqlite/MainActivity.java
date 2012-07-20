@@ -46,13 +46,13 @@ public class MainActivity extends Activity {
 		);
 
 		// //向数据库中插入和更新数据
-		//
-		//insertAndUpdateData(myHelper);
-		//
-		// //查询数据
-		//
-//		String result = queryData(myHelper);
-//		Log.v("carlos", "result is: " + result);
+		
+		insertAndUpdateData(myHelper);
+		
+		 //查询数据
+		
+		String result = queryData(myHelper);
+		Log.v("carlos", "result is: " + result);
 	}
 
 	
@@ -133,9 +133,14 @@ public class MainActivity extends Activity {
 
 		// 查询表中的数据
 
-		Cursor cursor = db.query(mysql.gameItemTable, null, "name = ?",
-				new String[] { "carlos" }, null, null, "id asc");
+//		Cursor cursor = db.query(mysql.gameItemTable, null, "name = ?",
+//				new String[] { "carlos" }, null, null, "id asc");
 
+		
+		Cursor cursor = db.query(mysql.gameItemTable, null, null,
+				null, null, null, "id asc");
+
+		
 		// 获取name列的索引
 
 		int nameIndex = cursor.getColumnIndex("name");
