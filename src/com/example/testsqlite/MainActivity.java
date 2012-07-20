@@ -15,6 +15,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.support.v4.app.NavUtils;
 
+@SuppressLint("ParserError")
 public class MainActivity extends Activity {
 
 	mysql myHelper;
@@ -26,38 +27,32 @@ public class MainActivity extends Activity {
 		// 创建MySQLiteOpenHelper辅助类对象
 
 		myHelper = new mysql(this, "my.db", null, 1);
-		
-		Button btnAdd = (Button)findViewById(R.id.buttonAdd);
-		Button btnDel = (Button)findViewById(R.id.buttonDel);
-		
-		
-		final EditText editAdd = (EditText)findViewById(R.id.editTextAdd);
-		EditText editDel = (EditText)findViewById(R.id.editTextDel);
-		
-		btnAdd.setOnClickListener(
-				new OnClickListener() {
-					
-					@Override
-					public void onClick(View v) {
-						// TODO Auto-generated method stub
-						editAdd.setText("hello");
-					}
-				}
-		);
+
+		Button btnAdd = (Button) findViewById(R.id.buttonAdd);
+		Button btnDel = (Button) findViewById(R.id.buttonDel);
+
+		final EditText editAdd = (EditText) findViewById(R.id.editTextAdd);
+		EditText editDel = (EditText) findViewById(R.id.editTextDel);
+
+		btnAdd.setOnClickListener(new OnClickListener() {
+
+			@Override
+			public void onClick(View v) {
+				// TODO Auto-generated method stub
+				editAdd.setText("hello");
+			}
+		});
 
 		// //向数据库中插入和更新数据
-		
+
 		insertAndUpdateData(myHelper);
-		
-		 //查询数据
-		
+
+		// 查询数据
+		delData("xh");
 		String result = queryData(myHelper);
 		Log.v("carlos", "result is: " + result);
 	}
 
-	
-	
-	
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 		getMenuInflater().inflate(R.menu.activity_main, menu);
@@ -121,6 +116,16 @@ public class MainActivity extends Activity {
 
 	}
 
+	public void delData(String name) {
+
+		// 获取数据库对象
+
+		SQLiteDatabase db = myHelper.getWritableDatabase();
+		db.delete(mysql.gameItemTable, "name = ?", new String[]{name});
+		db.close();
+		return;
+	}
+
 	// 从数据库中查询数据
 
 	public String queryData(mysql myHelper) {
@@ -133,14 +138,12 @@ public class MainActivity extends Activity {
 
 		// 查询表中的数据
 
-//		Cursor cursor = db.query(mysql.gameItemTable, null, "name = ?",
-//				new String[] { "carlos" }, null, null, "id asc");
+		// Cursor cursor = db.query(mysql.gameItemTable, null, "name = ?",
+		// new String[] { "carlos" }, null, null, "id asc");
 
-		
-		Cursor cursor = db.query(mysql.gameItemTable, null, null,
-				null, null, null, "id asc");
+		Cursor cursor = db.query(mysql.gameItemTable, null, null, null, null,
+				null, "id asc");
 
-		
 		// 获取name列的索引
 
 		int nameIndex = cursor.getColumnIndex("name");

@@ -8,6 +8,7 @@ import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteDatabase.CursorFactory;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.util.Log;
 
 /**
  * @author carlos
@@ -15,7 +16,7 @@ import android.database.sqlite.SQLiteOpenHelper;
  */
 public class mysql extends SQLiteOpenHelper {
 	
-	public final static String gameItemTable = "game_item";
+	public final static String gameItemTable = "qwegame_item";
 
 	public mysql(Context context, String name, CursorFactory factory,
 			int version) {
@@ -32,12 +33,22 @@ public class mysql extends SQLiteOpenHelper {
 	 */
 	@Override
 	public void onCreate(SQLiteDatabase arg0) {
+//		Log.v("carlos","create the table we need");
+//		// TODO Auto-generated method stub
+//		arg0.execSQL("create table if not exists "+gameItemTable+"("
+//				+ "id integer primary key,"
+//				+ "name varchar," + "level integer)");
+		
+	}
+	@Override
+	public void onOpen(SQLiteDatabase arg0) {
+		Log.v("carlos","open the table we need");
 		// TODO Auto-generated method stub
 		arg0.execSQL("create table if not exists "+gameItemTable+"("
 				+ "id integer primary key,"
 				+ "name varchar," + "level integer)");
+		
 	}
-
 	/*
 	 * (non-Javadoc)
 	 * 
