@@ -9,6 +9,10 @@ import android.database.sqlite.SQLiteDatabase;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.view.View.OnClickListener;
+import android.widget.Button;
+import android.widget.EditText;
 import android.support.v4.app.NavUtils;
 
 public class MainActivity extends Activity {
@@ -22,33 +26,54 @@ public class MainActivity extends Activity {
 		// 创建MySQLiteOpenHelper辅助类对象
 
 		myHelper = new mysql(this, "my.db", null, 1);
+		
+		Button btnAdd = (Button)findViewById(R.id.buttonAdd);
+		Button btnDel = (Button)findViewById(R.id.buttonDel);
+		
+		
+		final EditText editAdd = (EditText)findViewById(R.id.editTextAdd);
+		EditText editDel = (EditText)findViewById(R.id.editTextDel);
+		
+		btnAdd.setOnClickListener(
+				new OnClickListener() {
+					
+					@Override
+					public void onClick(View v) {
+						// TODO Auto-generated method stub
+						editAdd.setText("hello");
+					}
+				}
+		);
 
 		// //向数据库中插入和更新数据
 		//
-		insertAndUpdateData(myHelper);
+		//insertAndUpdateData(myHelper);
 		//
 		// //查询数据
 		//
-		String result = queryData(myHelper);
-		Log.v("carlos", "result is: " + result);
+//		String result = queryData(myHelper);
+//		Log.v("carlos", "result is: " + result);
 	}
 
+	
+	
+	
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 		getMenuInflater().inflate(R.menu.activity_main, menu);
 
-//		// 创建MySQLiteOpenHelper辅助类对象
-//
-//		myHelper = new mysql(this, "my.db", null, 1);
-//
-//		// //向数据库中插入和更新数据
-//		//
-//		insertAndUpdateData(myHelper);
-//		//
-//		// //查询数据
-//		//
-//		String result = queryData(myHelper);
-//		Log.v("carlos", "result is: " + result);
+		// // 创建MySQLiteOpenHelper辅助类对象
+		//
+		// myHelper = new mysql(this, "my.db", null, 1);
+		//
+		// // //向数据库中插入和更新数据
+		// //
+		// insertAndUpdateData(myHelper);
+		// //
+		// // //查询数据
+		// //
+		// String result = queryData(myHelper);
+		// Log.v("carlos", "result is: " + result);
 		return true;
 	}
 
@@ -127,7 +152,7 @@ public class MainActivity extends Activity {
 
 		}
 		cursor.close();// 关闭结果集
-		
+
 		db.close();// 关闭数据库对象
 
 		return result;
@@ -137,11 +162,11 @@ public class MainActivity extends Activity {
 	@Override
 	protected void onDestroy() {
 
-//		SQLiteDatabase db = myHelper.getWritableDatabase();// 获取数据库对象
+		// SQLiteDatabase db = myHelper.getWritableDatabase();// 获取数据库对象
 
 		// 删除hero_info表中所有的数据 传入1 表示删除所有行------>点击back按钮
 
-//		db.delete(mysql.gameItemTable, "1", null);
+		// db.delete(mysql.gameItemTable, "1", null);
 
 		super.onDestroy();
 

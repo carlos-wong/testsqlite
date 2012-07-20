@@ -4,6 +4,7 @@
     android:layout_height="match_parent" >
 
     <TextView
+        android:id="@+id/textView1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
@@ -11,5 +12,40 @@
         android:padding="@dimen/padding_medium"
         android:text="@string/hello_world"
         tools:context=".MainActivity" />
+
+    <EditText
+        android:id="@+id/editTextAdd"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_toLeftOf="@+id/textView1"
+        android:ems="10" />
+
+    <Button
+        android:id="@+id/buttonAdd"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="14dp"
+        android:text="add" />
+
+    <EditText
+        android:id="@+id/editTextDel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@+id/buttonAdd"
+        android:layout_marginTop="51dp"
+        android:ems="10" />
+
+    <Button
+        android:id="@+id/buttonDel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/editTextDel"
+        android:layout_alignBottom="@+id/editTextDel"
+        android:layout_alignParentRight="true"
+        android:text="del" />
 
 </RelativeLayout>
